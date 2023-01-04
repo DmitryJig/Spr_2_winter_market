@@ -46,13 +46,19 @@
             <td>Title product</td>
             <td>Count</td>
             <td>Price</td>
+            <td>Action</td>
         </tr>
         </thead>
         <tbody>
         <tr ng-repeat="item in cart.items">
             <td>{{item.productTitle}}</td>
-            <td>{{item.quantity}}</td>
+            <td>
+                <button class="btn btn-light" ng-click="decrementInCart(item.productId)">-</button>
+                {{item.quantity}}
+                <button class="btn btn-light" ng-click="addToCart(item.productId)">+</button>
+            </td>
             <td>{{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}</td>
+            <td><button class="btn btn-danger" ng-click="clearCartLine(item.productId)">X</button></td>
         </tr>
         <tr>
             <td>Итого</td>
@@ -61,6 +67,7 @@
         </tr>
         </tbody>
     </table>
+    <button class="btn btn-danger" ng-click="clearCart()">Очистить корзину</button>
 
     <h3>Create new product</h3>
     <form novalidate ng-submit="submitCreateProduct()">

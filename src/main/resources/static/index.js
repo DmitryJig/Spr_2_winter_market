@@ -28,10 +28,29 @@ angular.module('app', []).controller('indexController', function ($scope, $http)
         });
     }
 
+    $scope.decrementInCart = function (productId){
+        $http.get(contextPath + '/cart/decrement/' + productId).then(function (response){
+            $scope.loadCart();
+        });
+    }
+
     $scope.loadCart = function (){
         $http.get(contextPath + '/cart').then(function (response){
             $scope.cart = response.data;
         });
+    }
+
+    $scope.clearCart = function (){
+        $http.get(contextPath + '/cart/clear').then(function (response){
+            $scope.loadCart();
+        })
+    }
+
+    $scope.clearCartLine = function (productId){
+        $http.get(contextPath + '/cart/clear/' + productId)
+            .then(function (response){
+                $scope.loadCart();
+            })
     }
 
     $scope.loadProducts();

@@ -6,6 +6,7 @@ import lombok.Data;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Data
 public class Cart {
@@ -22,9 +23,26 @@ public class Cart {
 
 
     public void add(Product product){
-        items.add(new CartItem(product.getId(), product.getTitle(), 1, product.getPrice(), product.getPrice()));
+        Optional<CartItem> optionalItem = items.stream().filter(i -> i.getProductId().equals(product.getId())).findFirst();
+        if (optionalItem.isPresent()){
+            CartItem item = optionalItem.get();
+            item.setQuantity(item.getQuantity() + 1);
+            item.setPrice(item.getPrice() + product.getPrice());
+        } else {
+            items.add(new CartItem(product.getId(), product.getTitle(), 1, product.getPrice(), product.getPrice()));
+        }
         recalculate();
-    }   // todo доработать в дз
+    }
+
+    public void decrement(Long id){
+        Optional<CartItem> optionalItem = items.stream().filter(i -> i.getProductId().equals(id)).findFirst();
+        if (optionalItem.isPresent()) {
+            CartItem item = optionalItem.get();
+            item.setQuantity(item.getQuantity() - 1);
+            item.setPrice(item.getPrice() - item.getPricePerProduct());
+        }
+        recalculate();
+    }
 
     private void recalculate(){
         totalPrice = 0;
