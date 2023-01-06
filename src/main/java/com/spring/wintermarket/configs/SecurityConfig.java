@@ -28,7 +28,8 @@ public class SecurityConfig {
                 .csrf().disable()
                 .cors().disable()
                 .authorizeHttpRequests()
-                .antMatchers("/secured").authenticated()
+                .antMatchers("/auth_check").authenticated()
+                .antMatchers("/api/v1/orders").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 // ниже говорим спрингу сессии не использовать

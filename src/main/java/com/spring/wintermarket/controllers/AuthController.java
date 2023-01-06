@@ -2,6 +2,7 @@ package com.spring.wintermarket.controllers;
 
 import com.spring.wintermarket.dtos.JwtRequest;
 import com.spring.wintermarket.dtos.JwtResponse;
+import com.spring.wintermarket.dtos.StringResponse;
 import com.spring.wintermarket.services.UserService;
 import com.spring.wintermarket.utils.JwtTokenUtil;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +16,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
+
+import java.security.Principal;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,4 +42,9 @@ public class AuthController {
 //    public String helloSecurity(){
 //        return "Hello";
 //    }
+
+    @GetMapping("auth_check")
+    public StringResponse authCheck(Principal principal){
+        return new StringResponse(principal.getName());
+    }
 }

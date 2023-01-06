@@ -1,7 +1,7 @@
 package com.spring.wintermarket.services;
 
-import com.spring.wintermarket.dtos.Cart;
-import com.spring.wintermarket.dtos.CartItem;
+import com.spring.wintermarket.models.Cart;
+import com.spring.wintermarket.models.CartItem;
 import com.spring.wintermarket.entities.Product;
 import com.spring.wintermarket.exceptions.ResourceNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -36,16 +36,12 @@ public class CartService {
     }
 
     public void clearCart(){
-        init();
+        tempCart.clear();
     }
 
-    public void clearCart(Long id){
-        List<CartItem> newItems = tempCart.getItems().stream().filter(item-> !item.getProductId().equals(id)).collect(Collectors.toList());
-        tempCart.setItems(newItems);
-//        tempCart.getItems().removeIf(i-> i.getProductId().equals(id));
+    public void remove(Long productId){
+        tempCart.remove(productId);
     }
 
-    public void decrementInCart(Long id) {
-        tempCart.decrement(id);
-    }
+
 }

@@ -1,6 +1,6 @@
 package com.spring.wintermarket.controllers;
 
-import com.spring.wintermarket.dtos.Cart;
+import com.spring.wintermarket.models.Cart;
 import com.spring.wintermarket.services.CartService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,15 +28,9 @@ public class CartController {
     }
 
     // удаляем строку из корзины
-    @GetMapping("/clear/{id}")
-    public void clearCart(@PathVariable Long id){
-        cartService.clearCart(id);
-    }
-
-    // уменьшаем количество товара в корзине
-    @GetMapping("/decrement/{id}")
-    public void decrementInCart(@PathVariable Long id){
-        cartService.decrementInCart(id);
+    @GetMapping("/remove/{id}")
+    public void removeFromCart(@PathVariable Long id){
+        cartService.remove(id);
     }
 
     @GetMapping
