@@ -26,8 +26,8 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception{
         return http
                 .csrf().disable()
-                .cors().disable()
-                .authorizeHttpRequests()
+//                .cors().disable()
+                .authorizeRequests()
                 .antMatchers("/auth_check").authenticated()
                 .antMatchers("/api/v1/orders").authenticated()
                 .anyRequest().permitAll()
@@ -58,5 +58,4 @@ public class SecurityConfig {
         authenticationProvider.setUserDetailsService(userService);
         return authenticationProvider;
     }
-
 }

@@ -1,8 +1,8 @@
 package com.spring.wintermarket.controllers;
 
+import com.spring.wintermarket.converters.OrderConverter;
 import com.spring.wintermarket.dtos.OrderData;
 import com.spring.wintermarket.dtos.OrderDto;
-import com.spring.wintermarket.entities.Order;
 import com.spring.wintermarket.entities.User;
 import com.spring.wintermarket.exceptions.ResourceNotFoundException;
 import com.spring.wintermarket.services.OrderService;
@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 public class OrderController {
     private final OrderService orderService;
     private final UserService userService;
+    private final OrderConverter orderConverter;
 
     // показываем список всех заказов пользователя
     @GetMapping
@@ -28,7 +29,7 @@ public class OrderController {
         return orderService
                 .findAllOrdersByUserName(principal.getName())
                 .stream()
-                .map(OrderDto::new)
+                .map(orderConverter::entityToDto)
                 .collect(Collectors.toList());
     }
 

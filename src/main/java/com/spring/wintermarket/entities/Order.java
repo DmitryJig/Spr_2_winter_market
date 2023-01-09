@@ -13,9 +13,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "orders")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 public class Order {
 
@@ -49,19 +47,4 @@ public class Order {
     @UpdateTimestamp
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
-            return false;
-        Order order = (Order) o;
-        return id != null && Objects.equals(id, order.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
-    }
 }

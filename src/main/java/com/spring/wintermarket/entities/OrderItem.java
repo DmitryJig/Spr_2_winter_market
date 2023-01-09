@@ -11,9 +11,7 @@ import java.util.Objects;
 
 @Entity
 @Table(name = "order_items")
-@Getter
-@Setter
-@ToString
+@Data
 @NoArgsConstructor
 public class OrderItem {
 
@@ -47,26 +45,11 @@ public class OrderItem {
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
 
-    public OrderItem(Product product, Order order, int quantity, int pricePerProduct, int price) {
+    public OrderItem(Product product, Order order, int quantity, int pricePerProduct, int price){
         this.product = product;
         this.order = order;
         this.quantity = quantity;
         this.pricePerProduct = pricePerProduct;
         this.price = price;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o)
-            return true;
-        if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o))
-            return false;
-        OrderItem orderItem = (OrderItem) o;
-        return id != null && Objects.equals(id, orderItem.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return getClass().hashCode();
     }
 }

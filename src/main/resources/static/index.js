@@ -119,6 +119,13 @@ angular.module('app', ['ngStorage']).controller('indexController', function ($sc
     $scope.loadOrders = function (){
         $http.get(contextPath + '/orders').then(function (response){
             $scope.Orders = response.data;
+
+        })
+    }
+
+    $scope.submitCreateProduct = function (){
+        $http.post(contextPath + '/products', $scope.newProduct).then(function (response){
+            $scope.loadProducts();
         })
     }
 
