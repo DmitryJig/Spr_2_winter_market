@@ -4,8 +4,24 @@
         xmlns:tns="http://www.jd.com/spring/ws/productsWs"
         targetNamespace="http://www.jd.com/spring/ws/productsWs" elementFormDefault="qualified">
 
+    <xs:element name="getProductByNameRequest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="title" type="xs:string"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
     <xs:element name="getAllProductsRequest">
         <xs:complexType/>
+    </xs:element>
+
+    <xs:element name="getProductByNameResponse">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="productWs" type="tns:productWs"/>
+            </xs:sequence>
+        </xs:complexType>
     </xs:element>
 
     <xs:element name="getAllProductsResponse">
@@ -20,7 +36,7 @@
         <xs:sequence>
             <xs:element name="id" type="xs:long"/>
             <xs:element name="title" type="xs:string"/>
-            <xs:element name="price" type="xs:integer"/>
+            <xs:element name="price" type="xs:int"/>
             <xs:element name="categoryTitle" type="xs:string"/>
         </xs:sequence>
     </xs:complexType>

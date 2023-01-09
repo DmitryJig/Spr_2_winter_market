@@ -9,8 +9,6 @@ import com.spring.wintermarket.soap.productsws.ProductWs;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-import java.math.BigInteger;
-
 @Component
 @RequiredArgsConstructor
 public class ProductConverter {
@@ -33,7 +31,7 @@ public class ProductConverter {
         ProductWs productWs = new ProductWs();
         productWs.setId(product.getId());
         productWs.setTitle(product.getTitle());
-        productWs.setPrice(BigInteger.valueOf(product.getPrice()));
+        productWs.setPrice(product.getPrice());
         productWs.setCategoryTitle(product.getCategory().getTitle());
         return productWs;
     }

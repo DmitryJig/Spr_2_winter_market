@@ -30,9 +30,18 @@ public class ProductService {
         Product product = new Product();
         product.setPrice(productDto.getPrice());
         product.setTitle(productDto.getTitle());
-        Category category = categoryService.findByTitle(productDto.getCategoryTitle()).orElseThrow(()-> new ResourceNotFoundException("category not found"));
+        Category category = categoryService
+                .findByTitle(productDto.getCategoryTitle())
+                .orElseThrow(()-> new ResourceNotFoundException("category not found"));
         product.setCategory(category);
         productRepository.save(product);
+        return product;
+    }
+
+    public Product findByTitle(String title){
+        Product product = productRepository
+                .findByTitle(title)
+                .orElseThrow(()-> new ResourceNotFoundException("Product not found"));
         return product;
     }
 

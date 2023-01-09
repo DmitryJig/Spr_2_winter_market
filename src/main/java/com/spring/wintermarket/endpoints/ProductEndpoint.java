@@ -2,9 +2,7 @@ package com.spring.wintermarket.endpoints;
 
 import com.spring.wintermarket.converters.ProductConverter;
 import com.spring.wintermarket.services.ProductService;
-import com.spring.wintermarket.soap.productsws.GetAllProductsRequest;
-import com.spring.wintermarket.soap.productsws.GetAllProductsResponse;
-import com.spring.wintermarket.soap.productsws.ProductWs;
+import com.spring.wintermarket.soap.productsws.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.ws.server.endpoint.annotation.Endpoint;
 import org.springframework.ws.server.endpoint.annotation.PayloadRoot;
@@ -23,7 +21,31 @@ public class ProductEndpoint {
     private final ProductConverter productConverter;
 
     /*
-        Пример запроса: POST http://localhost:8189/ws
+        Пример запроса: POST http://localhost:8189/winter/ws
+
+        Header -> Content-Type: text/xml
+
+        <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:f="http://www.jd.com/spring/ws/productsWs">
+            <soapenv:Header/>
+            <soapenv:Body>
+                <f:getProductByNameRequest>
+                    <f:title>Bread</f:title>
+                </f:getProductByNameRequest>
+            </soapenv:Body>
+        </soapenv:Envelope>
+     */
+    @PayloadRoot(namespace = NAMESPACE_URI, localPart = "getProductByNameRequest")
+    @ResponsePayload
+    public GetProductByNameResponse getProductByName(@RequestPayload GetProductByNameRequest request) {
+        GetProductByNameResponse response = new GetProductByNameResponse();
+        response.setProductWs(productConverter.entityToSoap(productService.findByTitle(request.getTitle())));
+        return response;
+    }
+
+    /*
+        Пример запроса: POST http://localhost:8189/winter/ws
+
+        Header -> Content-Type: text/xml
 
         <soapenv:Envelope xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:f="http://www.jd.com/spring/ws/productsWs">
             <soapenv:Header/>

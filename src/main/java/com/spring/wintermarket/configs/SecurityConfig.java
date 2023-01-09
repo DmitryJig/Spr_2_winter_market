@@ -26,7 +26,7 @@ public class SecurityConfig {
     public SecurityFilterChain configure(HttpSecurity http) throws Exception{
         return http
                 .csrf().disable()
-//                .cors().disable()
+                .cors().disable()
                 .authorizeRequests()
                 .antMatchers("/auth_check").authenticated()
                 .antMatchers("/api/v1/orders").authenticated()
