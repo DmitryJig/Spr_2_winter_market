@@ -1,4 +1,4 @@
-package com.spring.wintermarket.core.utils;
+package com.spring.wintermarket.auth.utils;
 
 
 import io.jsonwebtoken.Claims;
@@ -39,22 +39,5 @@ public class JwtTokenUtil {
                 .setExpiration(expiredDate)
                 .signWith(SignatureAlgorithm.HS256, secret)
                 .compact();
-    }
-
-    public String getUsernameFromToken(String token) {
-//        return getClaimFromToken(token, Claims::getSubject);
-        return getAllClaimsFromToken(token).getSubject();
-    }
-
-    public List<String> getRoles(String token) {
-//        return getClaimFromToken(token, (Function<Claims, List<String>>) claims -> claims.get("roles", List.class));
-        return getAllClaimsFromToken(token).get("roles", List.class);
-    }
-
-    private Claims getAllClaimsFromToken(String token) {
-        return Jwts.parser()
-                .setSigningKey(secret)
-                .parseClaimsJws(token)
-                .getBody();
     }
 }

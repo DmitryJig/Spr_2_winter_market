@@ -1,8 +1,11 @@
-package com.spring.wintermarket.core.entities;
+package com.spring.wintermarket.auth.entities;
 
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 import java.util.Collection;
 
 @Entity
@@ -21,12 +24,20 @@ public class User {
     @Column(name = "password")
     private String password;
 
-//    @Column(name = "email")
-//    private String email;
+    @Column(name = "email")
+    private String email;
 
     @ManyToMany
     @JoinTable(name = "users_roles",
     joinColumns = @JoinColumn(name = "user_id"),
     inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Collection<Role> roles;
+
+    @CreationTimestamp
+    @Column(name = "created_at")
+    private LocalDateTime createdAt;
+
+    @UpdateTimestamp
+    @Column(name = "updatedAt")
+    private LocalDateTime updatedAt;
 }

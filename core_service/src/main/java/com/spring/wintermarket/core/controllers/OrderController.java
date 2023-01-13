@@ -2,12 +2,10 @@ package com.spring.wintermarket.core.controllers;
 
 import com.spring.winter.market.api.dtos.OrderData;
 import com.spring.winter.market.api.dtos.OrderDto;
-import com.spring.winter.market.api.exceptions.ResourceNotFoundException;
 import com.spring.wintermarket.core.converters.OrderConverter;
-import com.spring.wintermarket.core.entities.User;
 import com.spring.wintermarket.core.services.OrderService;
-import com.spring.wintermarket.core.services.UserService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,17 +16,16 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/api/v1/orders")
-@CrossOrigin("*")
+@Slf4j
 public class OrderController {
     private final OrderService orderService;
-    private final UserService userService;
     private final OrderConverter orderConverter;
 
-    // показываем список всех заказов пользователя
+//     показываем список всех заказов пользователя
     @GetMapping
-    public List<OrderDto> findAllOrders(Principal principal){
+    public List<OrderDto> findAllOrders(@RequestHeader String username){
         return orderService
-                .findAllOrdersByUserName(principal.getName())
+                .findAllOrdersByUserName(username)
                 .stream()
                 .map(orderConverter::entityToDto)
                 .collect(Collectors.toList());
@@ -37,20 +34,10 @@ public class OrderController {
 //     создание нового заказа
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createOrder(Principal principal, @RequestBody OrderData orderData){
-        User user = userService
-                .findByUsername(principal.getName())
-                .orElseThrow(()-> new ResourceNotFoundException("User with name: " + principal.getName() + " not found"));
-        orderService.createOrder(user, orderData);
+    public void createOrder(@RequestHeader String username /*,@RequestBody OrderData orderData*/){
+        log.info("Создание заказа пользователем " + username);
+        orderService.createOrder(username);
     }
 
-    // создание нового заказа
-//    @PostMapping
-//    @ResponseStatus(HttpStatus.CREATED)
-//    public void createOrder(Principal principal, @RequestBody OrderData orderData){
-//        User user = userService
-//                .findByUsername(principal.getName())
-//                .orElseThrow(()-> new ResourceNotFoundException("User with name: " + principal.getName() + " not found"));
-//        orderService.createOrder(user, orderData);
-//    }
+
 }

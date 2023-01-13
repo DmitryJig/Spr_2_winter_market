@@ -1,7 +1,7 @@
 server:
   port: 8189
   servlet:
-    context-path: /winter
+    context-path: /winter-market-core
 spring:
   datasource:
     driver-class-name: org.h2.Driver
@@ -18,9 +18,13 @@ spring:
       enabled: true
       settings:
         web-allow-others: false
-jwt:
-  secret: tufifuigujhjkvbjkg65475457fgffu5874roigolgk;p
-  lifetime: 36000000
-integration:
-  getCurrentCartEndpoint: http://localhost:8190/winter-carts/api/v1/cart
-  clearCartEndpoint: http://localhost:8190/winter-carts/api/v1/cart/clear
+
+integrations:
+  product-service:
+    url: http://localhost:8190/winter-market-carts
+    read-timeout: 10000
+    write-timeout: 5000
+    connect-timeout: 5000
+#integration:
+#  getCurrentCartEndpoint: http://localhost:8190/winter-carts/api/v1/cart
+#  clearCartEndpoint: http://localhost:8190/winter-carts/api/v1/cart/clear

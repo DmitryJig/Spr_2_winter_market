@@ -8,6 +8,7 @@ import org.springframework.http.client.ClientHttpRequest;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RequestCallback;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.reactive.function.client.WebClient;
 
 import java.io.IOException;
 import java.net.http.HttpResponse;
@@ -16,19 +17,21 @@ import java.util.Optional;
 @Component
 @RequiredArgsConstructor
 public class CartServiceIntegration {
-    private final RestTemplate restTemplate;
+    private final WebClient cartServiceWebClient; // чтобы работал вебклиент нужна зависимость webflux
 
-    @Value("${integration.getCurrentCartEndpoint}")
-    private String getCurrentCartEndpoint;
-
-    @Value("${integration.clearCartEndpoint}")
-    private String clearCartEndpoint;
-
-    public Optional<CartDto> getCurrentCart(){
-        return Optional.ofNullable(restTemplate.getForObject(getCurrentCartEndpoint, CartDto.class));
+    public CartDto getCurrentCart(){
+        return cartServiceWebClient.get()
+                .uri("/api/v1/cart")
+                .retrieve()
+                .bodyToMono(CartDto.class)
+                .block();
     }
 
     public void clearCart(){
-        restTemplate.put(clearCartEndpoint, null);
+        cartServiceWebClient.put()
+                .uri("/api/v1/cart/clear")
+                .retrieve()
+                .toBodilessEntity()
+                .block();
     }
 }

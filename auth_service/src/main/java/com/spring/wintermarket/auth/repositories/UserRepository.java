@@ -1,8 +1,8 @@
-package com.spring.wintermarket.core.repositories;
+package com.spring.wintermarket.auth.repositories;
 
-import com.spring.wintermarket.core.entities.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import com.spring.wintermarket.auth.entities.User;
 
 import java.util.Optional;
 

@@ -1,0 +1,46 @@
+server:
+  port: 5555
+
+spring:
+  application:
+    name: gateway_service
+  cloud:
+    gateway:
+      globalcors:
+        corsConfigurations:
+          '[/**]':
+            allowedOrigins: "http://localhost:3000"
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders: "*"
+      routes:
+        - id: core_service
+          uri: http://localhost:8189
+          predicates:
+            - Path=/core/** # http://localhost:5555/core/api/v1/products -> http://localhost:8189/web-market-core/api/v1/products
+          filters:
+            - StripPrefix=1 # отрезаем первый префикс ("/core")
+            - PrefixPath=/winter-market-core
+            - JwtAuthFilter
+        - id: cart_service
+          uri: http://localhost:8190
+          predicates:
+            - Path=/cart/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/winter-market-carts  # добавляет к урлу микросервиса этот путь
+            - JwtAuthFilter
+        - id: auth_service
+          uri: http://localhost:8188
+          predicates:
+            - Path=/auth/**
+          filters:
+            - StripPrefix=1
+            - PrefixPath=/winter-market-auth
+            - JwtAuthFilter
+
+jwt:
+  secret: tufifuigujhjkvbjkg65475457fgffu5874roigolgk;p

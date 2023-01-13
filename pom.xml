@@ -14,6 +14,10 @@
 		<module>cart_service</module>
 		<module>api</module>
         <module>frontend_service</module>
-    </modules>
+        <module>gateway_service</module>
+		<module>auth_service</module>
+	</modules>
 
 </project>
+
+

@@ -1,11 +1,8 @@
 package com.spring.wintermarket.core.services;
 
 import com.spring.winter.market.api.dtos.CartDto;
-import com.spring.winter.market.api.dtos.OrderData;
-import com.spring.winter.market.api.exceptions.ResourceNotFoundException;
 import com.spring.wintermarket.core.entities.Order;
 import com.spring.wintermarket.core.entities.OrderItem;
-import com.spring.wintermarket.core.entities.User;
 import com.spring.wintermarket.core.integrations.CartServiceIntegration;
 import com.spring.wintermarket.core.repositories.OrderRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,15 +20,15 @@ public class OrderService {
     private final ProductService productService;
 
     @Transactional
-    public void createOrder(User user, OrderData orderData){
-        CartDto cartDto = cartServiceIntegration
-                .getCurrentCart()
-                .orElseThrow(()-> new ResourceNotFoundException("Не удается загрузить корзину")); // cartServiceIntegration.getCurrentCart(); получить из карт МС
+    public void createOrder(String username){
+
+        CartDto cartDto = cartServiceIntegration.getCurrentCart();
+
         Order order = new Order();
-        order.setUser(user);
+        order.setUsername(username);
         order.setTotalPrice(cartDto.getTotalPrice());
-        order.setAddress(orderData.getAddress());
-        order.setPhone(orderData.getPhone());
+//        order.setAddress(orderData.getAddress());
+//        order.setPhone(orderData.getPhone());
         order.setItems(cartDto.getItems().stream().map(
                 cartItem -> new OrderItem(
                         productService.findById(cartItem.getProductId()).get(),
@@ -62,6 +59,6 @@ public class OrderService {
 //    }
 
     public List<Order> findAllOrdersByUserName(String username){
-        return orderRepository.findAllByUserUsername(username);
+        return orderRepository.findAllByUsername(username);
     }
 }

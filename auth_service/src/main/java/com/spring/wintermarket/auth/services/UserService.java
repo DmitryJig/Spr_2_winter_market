@@ -1,7 +1,7 @@
-package com.spring.wintermarket.core.services;
+package com.spring.wintermarket.auth.services;
 
-import com.spring.wintermarket.core.entities.Role;
-import com.spring.wintermarket.core.repositories.UserRepository;
+import com.spring.winter.market.api.exceptions.ResourceNotFoundException;
+import com.spring.wintermarket.auth.repositories.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -9,7 +9,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import com.spring.wintermarket.core.entities.User;
+import com.spring.wintermarket.auth.entities.User;
+import com.spring.wintermarket.auth.entities.Role;
+
 import javax.transaction.Transactional;
 import java.util.Collection;
 import java.util.Optional;
@@ -27,7 +29,7 @@ public class UserService implements UserDetailsService {
     @Override
     @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = findByUsername(username).get();
+        User user = findByUsername(username).orElseThrow(()->new ResourceNotFoundException("User not found"));
         return new org.springframework
                 .security.core.userdetails
                 .User(user.getUsername(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
