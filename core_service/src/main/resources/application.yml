@@ -20,7 +20,7 @@ spring:
         web-allow-others: false
 
 integrations:
-  product-service:
+  cart-service:
     url: http://localhost:8190/winter-market-carts
     read-timeout: 10000
     write-timeout: 5000

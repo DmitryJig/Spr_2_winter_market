@@ -2,6 +2,8 @@ package com.spring.wintermarket.carts.models;
 
 import com.spring.winter.market.api.dtos.ProductDto;
 import lombok.Data;
+
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -9,20 +11,20 @@ import java.util.List;
 @Data
 public class Cart {
     private List<CartItem> items;
-    private int totalPrice;
+    private BigDecimal totalPrice;
 
     public Cart() {
         this.items = new ArrayList<>();
     }
 
-    public List<CartItem> getItems(){
+    public List<CartItem> getItems() {
         return Collections.unmodifiableList(items);
     }
 
 
-    public void add(ProductDto product){
-        for (CartItem item : items){
-            if (product.getId().equals(item.getProductId())){
+    public void add(ProductDto product) {
+        for (CartItem item : items) {
+            if (product.getId().equals(item.getProductId())) {
                 item.changeQuantity(1);
                 recalculate();
                 return;
@@ -32,21 +34,21 @@ public class Cart {
         recalculate();
     }
 
-    public void remove(Long productId){
-        if (items.removeIf(item -> item.getProductId().equals(productId))){
+    public void remove(Long productId) {
+        if (items.removeIf(item -> item.getProductId().equals(productId))) {
             recalculate();
         }
     }
 
-    public void clear(){
+    public void clear() {
         items.clear();
-        totalPrice = 0;
+        totalPrice = new BigDecimal(0.0);
     }
 
-    private void recalculate(){
-        totalPrice = 0;
+    private void recalculate() {
+        totalPrice = new BigDecimal(0.0);
         for (CartItem item : items) {
-            totalPrice += item.getPrice();
+            totalPrice = totalPrice.add(item.getPrice());
         }
     }
 }

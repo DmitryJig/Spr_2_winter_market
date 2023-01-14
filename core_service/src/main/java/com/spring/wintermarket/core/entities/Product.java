@@ -1,17 +1,20 @@
 package com.spring.wintermarket.core.entities;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
 @Table(name = "products")
 @NoArgsConstructor
+@AllArgsConstructor
 public class Product {
 
     @Id
@@ -23,7 +26,7 @@ public class Product {
     private String title;
 
     @Column(name = "price")
-    private int price;
+    private BigDecimal price;
 
     @ManyToOne
     @JoinColumn(name = "category_id")

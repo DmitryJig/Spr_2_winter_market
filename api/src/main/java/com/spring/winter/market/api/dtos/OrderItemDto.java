@@ -1,17 +1,19 @@
 package com.spring.winter.market.api.dtos;
 
+import java.math.BigDecimal;
+
 public class OrderItemDto {
 
     private Long id;
     private String productTitle;
     private int quantity;
-    private int pricePerProduct;
-    private int price;
+    private BigDecimal pricePerProduct;
+    private BigDecimal price;
 
     public OrderItemDto() {
     }
 
-    public OrderItemDto(Long id, String productTitle, int quantity, int pricePerProduct, int price) {
+    public OrderItemDto(Long id, String productTitle, int quantity, BigDecimal pricePerProduct, BigDecimal price) {
         this.id = id;
         this.productTitle = productTitle;
         this.quantity = quantity;
@@ -43,19 +45,19 @@ public class OrderItemDto {
         this.quantity = quantity;
     }
 
-    public int getPricePerProduct() {
+    public BigDecimal getPricePerProduct() {
         return pricePerProduct;
     }
 
-    public void setPricePerProduct(int pricePerProduct) {
+    public void setPricePerProduct(BigDecimal pricePerProduct) {
         this.pricePerProduct = pricePerProduct;
     }
 
-    public int getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(int price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 }

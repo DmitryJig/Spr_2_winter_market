@@ -9,7 +9,7 @@ import org.springframework.boot.context.properties.ConstructorBinding;
 @Data
 public class CartServiceIntegrationProperties {
     private String url;
-    private Integer readTimeout; // берется из application.yaml, где был дефис будет кэмэл кейс
+    private Integer readTimeout; // берется из application.yml, где был дефис будет кэмэл кейс
     private Integer writeTimeout;
     private Integer connectTimeout;
 }

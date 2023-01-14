@@ -5,9 +5,14 @@ import com.spring.winter.market.api.exceptions.ResourceNotFoundException;
 import com.spring.wintermarket.core.entities.Category;
 import com.spring.wintermarket.core.entities.Product;
 import com.spring.wintermarket.core.repositories.ProductRepository;
+import com.spring.wintermarket.core.repositories.specifications.ProductSpecifications;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,8 +22,18 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
 
-    public List<Product> findAll(){
-        return productRepository.findAll();
+    public Page<Product> findAll(BigDecimal minPrice, BigDecimal maxPrice, String partTitle, int page){
+        Specification<Product> specification = Specification.where(null); // null значит спецификация ничего не проверяет
+        if (minPrice != null){
+            specification = specification.and(ProductSpecifications.priceGreaterOrEqualsThan(minPrice));
+        }
+        if (maxPrice != null){
+            specification = specification.and(ProductSpecifications.priceLessOrEqualsThan(maxPrice));
+        }
+        if (partTitle != null){
+            specification = specification.and(ProductSpecifications.titleLike(partTitle));
+        }
+        return productRepository.findAll(specification, PageRequest.of(page - 1, 5));
     }
 
     public Optional<Product> findById(Long id){

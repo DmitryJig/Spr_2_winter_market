@@ -5,18 +5,19 @@ import com.spring.winter.market.api.exceptions.ResourceNotFoundException;
 import com.spring.wintermarket.core.entities.Category;
 import com.spring.wintermarket.core.entities.Product;
 import com.spring.wintermarket.core.services.CategoryService;
-import com.spring.wintermarket.core.soap.productsws.ProductWs;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
+@Slf4j
 public class ProductConverter {
     private final CategoryService categoryService;
     public ProductDto entityToDto(Product product){
         ProductDto productDto = new ProductDto();
         productDto.setId(product.getId());
-        productDto.setTitle(productDto.getTitle());
+        productDto.setTitle(product.getTitle());
         productDto.setPrice(product.getPrice());
         productDto.setCategoryTitle(product.getCategory().getTitle());
 
@@ -31,14 +32,5 @@ public class ProductConverter {
         Category category = categoryService.findByTitle(productDto.getCategoryTitle()).orElseThrow(()-> new ResourceNotFoundException("category not found"));
         p.setCategory(category);
         return p;
-    }
-
-    public ProductWs entityToSoap(Product product){
-        ProductWs productWs = new ProductWs();
-        productWs.setId(product.getId());
-        productWs.setTitle(product.getTitle());
-        productWs.setPrice(product.getPrice());
-        productWs.setCategoryTitle(product.getCategory().getTitle());
-        return productWs;
     }
 }

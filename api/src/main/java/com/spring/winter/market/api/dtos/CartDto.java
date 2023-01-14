@@ -1,5 +1,6 @@
 package com.spring.winter.market.api.dtos;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -7,7 +8,7 @@ import java.util.List;
 
 public class CartDto {
     private List<CartItemDto> items;
-    private int totalPrice;
+    private BigDecimal totalPrice;
 
     public List<CartItemDto> getItems() {
         return items;
@@ -17,11 +18,11 @@ public class CartDto {
         this.items = items;
     }
 
-    public int getTotalPrice() {
+    public BigDecimal getTotalPrice() {
         return totalPrice;
     }
 
-    public void setTotalPrice(int totalPrice) {
+    public void setTotalPrice(BigDecimal totalPrice) {
         this.totalPrice = totalPrice;
     }
 }
