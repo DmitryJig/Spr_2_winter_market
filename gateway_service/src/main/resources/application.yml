@@ -42,5 +42,6 @@ spring:
             - PrefixPath=/winter-market-auth
             - JwtAuthFilter
 
+
 jwt:
   secret: tufifuigujhjkvbjkg65475457fgffu5874roigolgk;p

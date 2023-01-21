@@ -60,4 +60,9 @@ public class OrderItemDto {
     public void setPrice(BigDecimal price) {
         this.price = price;
     }
+
+    @Override
+    public String toString() {
+        return "OrderItemDto{" + "id=" + id + ", productTitle='" + productTitle + '\'' + ", quantity=" + quantity + ", pricePerProduct=" + pricePerProduct + ", price=" + price + '}';
+    }
 }

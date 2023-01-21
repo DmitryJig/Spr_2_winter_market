@@ -1,3 +1,14 @@
+Описание к ДЗ 7:
+модуль core_service
+сделал тесты:
+1. OrderControllerTest for OrderController
+2. ProductControllerTest for ProductController
+    Если не трудно посмотрите пожалуйста testFindAllProducts().
+    Так нормально его тестировать через jsonPath?
+3. ProductServiceTest for ProductService
+4. OrderServiceTest for OrderService
+
+
 Описание к ДЗ 6
 Добил создание заказов, была ошибка в application.yml в настройках интеграции
 Задание 1 перевести цены из int в BigDecimal:

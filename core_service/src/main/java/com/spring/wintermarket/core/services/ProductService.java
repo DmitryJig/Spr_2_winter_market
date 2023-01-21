@@ -7,17 +7,19 @@ import com.spring.wintermarket.core.entities.Product;
 import com.spring.wintermarket.core.repositories.ProductRepository;
 import com.spring.wintermarket.core.repositories.specifications.ProductSpecifications;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.math.BigDecimal;
-import java.util.List;
 import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Slf4j
 public class ProductService {
     private final ProductRepository productRepository;
     private final CategoryService categoryService;
@@ -40,6 +42,7 @@ public class ProductService {
         return productRepository.findById(id);
     }
 
+    @Transactional
     public Product createNewProduct(ProductDto productDto){
         Product product = new Product();
         product.setPrice(productDto.getPrice());
@@ -48,15 +51,9 @@ public class ProductService {
                 .findByTitle(productDto.getCategoryTitle())
                 .orElseThrow(()-> new ResourceNotFoundException("category not found"));
         product.setCategory(category);
-        productRepository.save(product);
+        product = productRepository.save(product);
         return product;
-    }
 
-    public Product findByTitle(String title){
-        Product product = productRepository
-                .findByTitle(title)
-                .orElseThrow(()-> new ResourceNotFoundException("Product not found"));
-        return product;
     }
 
     public void deleteById(Long id){

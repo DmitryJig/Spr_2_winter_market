@@ -62,4 +62,9 @@ public class OrderDto {
     public void setPhone(String phone) {
         this.phone = phone;
     }
+
+    @Override
+    public String toString() {
+        return "OrderDto{" + "id=" + id + ", userName='" + userName + '\'' + ", orderItemDtos=" + orderItemDtos + ", totalPrice=" + totalPrice + ", address='" + address + '\'' + ", phone='" + phone + '\'' + '}';
+    }
 }
