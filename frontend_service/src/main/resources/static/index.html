@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+    <meta charset="UTF-8">
+    <title>Market</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
+    <script src="index.js"></script>
+</head>
+<body>
+<div class="container" ng-controller="indexController">
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <ul class="navbar-nav">
+            <li class="nav-item">
+                <a class="nav-link" href="#!">Winter Market</a>
+            </li>
+            <li class="nav-item" ng-show="!isUserLoggedIn()">
+                <form class="align-middle" ng-submit="tryToAuth()">
+                    <div class="input-group input-group-sm" style="...">
+                        <input id="navLoginField" class="form-control" ng-model="user.username" type="text"
+                               aria-describedby="inputGroup-sizing-sm" style="...">
+                        <input id="navPasswordField" class="form-control" ng-model="user.password" type="password"
+                               aria-describedby="inputGroup-sizing-sm" style="...">
+                        <button id="navLoginSubmit" class="btn btn-outline-warning btn-sm"
+                                style="..." type="submit">Войти
+                        </button>
+                    </div>
+                </form>
+            </li>
+            <li class="nav-item" ng-show="isUserLoggedIn()" style="...">
+                <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">Выйти</button>
+            </li>
+            <li class="nav-item" style="padding: 4px;">
+                <button class="btn btn-outline-warning btn-sm" ng-click="checkAuth()">Кто я?</button>
+            </li>
+        </ul>
+    </nav>
+
+    <h1>My market</h1>
+
+    <h3>Filter</h3>
+    <form novalidate ng-submit="loadProducts()">
+        <div class="form-group row">
+            <div class="form-group col-md-3">
+                <label for="filterMinPrice">Min price</label>
+                <input class="form-control" type="number" ng-model="filter.min_price" id="filterMinPrice">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="filterMaxPrice">Max price</label>
+                <input class="form-control" type="number" ng-model="filter.max_price" id="filterMaxPrice">
+            </div>
+            <div class="form-group col-md-3">
+                <label for="filterTitle">Title</label>
+                <input class="form-control" type="text" ng-model="filter.title_part" id="filterTitle">
+            </div>
+        </div>
+        <div>
+            <button class="btn btn-success mt-2" type="submit">Perform filter</button>
+            <button class="btn btn-primary mt-2" ng-click="resetFilter()">Reset filter</button>
+        </div>
+    </form>
+
+    <h3 class="mt-3">List products</h3>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Title product</td>
+            <td>Price</td>
+            <td>Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="p in ProductsPage.content">
+            <td>{{p.id}}</td>
+            <td>{{p.title}}</td>
+            <td>
+                {{p.price}}
+            </td>
+            <td>
+                <!--                <button type="button" class="btn btn-primary" ng-click="showProductInfo(p.id)">info</button>-->
+                <!--                <button class="btn btn-danger" ng-click="deleteProductById(p.id)">Delete</button>-->
+                <button class="btn btn-primary" ng-click="addToCart(p.id)">Add to cart</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Корзина</h3>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td>Title product</td>
+            <td>Count</td>
+            <td>Price</td>
+            <td>Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in cart.items">
+            <td>{{item.productTitle}}</td>
+            <td>
+                <button class="btn btn-light" ng-click="decrementInCart(item.productId)">-</button>
+                {{item.quantity}}
+                <button class="btn btn-light" ng-click="addToCart(item.productId)">+</button>
+            </td>
+            <td>{{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="removeFromCart(item.productId)">Удалить</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Итого</td>
+            <td></td>
+            <td>{{cart.totalPrice}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-secondary" ng-click="clearCart()">Очистить корзину</button>
+
+    <div ng-show="isUserLoggedIn()">
+        <form novalidate ng-submit="createOrder()">
+<!--            <div class="form-group col-md-6">-->
+<!--                <label for="newOrderAddress">Введите адрес</label>-->
+<!--                <input class="form-control" type="text" ng-model="orderData.address" id="newOrderAddress">-->
+<!--            </div>-->
+<!--            <div class="form-group col-md-6">-->
+<!--                <label for="newOrderPhone">Введите номер телефона</label>-->
+<!--                <input class="form-control" type="text" ng-model="orderData.phone" id="newOrderPhone">-->
+<!--            </div>-->
+            <div>
+                <button class="btn btn-success mt-2 mb-5">Создать заказ</button>
+            </div>
+        </form>
+    </div>
+
+    <table ng-show="isUserLoggedIn()" class="table table-hover">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Total price</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="order in Orders">
+            <td>{{order.id}}</td>
+            <td>{{order.totalPrice}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <h3>Create new product</h3>
+    <form novalidate ng-submit="submitCreateProduct()">
+        <div class="form-group col-md-6">
+            <label for="newProductTitle">Title</label>
+            <input class="form-control" type="text" ng-model="newProduct.title" id="newProductTitle">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="newProductCost">Price</label>
+            <input class="form-control" type="text" ng-model="newProduct.price" id="newProductCost">
+        </div>
+        <div class="form-group col-md-6">
+            <label for="newProductCategory">Category</label>
+            <input class="form-control" type="text" ng-model="newProduct.categoryTitle" id="newProductCategory">
+        </div>
+        <div>
+            <button class="btn btn-success mt-2 mb-5">Save</button>
+        </div>
+    </form>
+</div>
+</body>
+</html>
