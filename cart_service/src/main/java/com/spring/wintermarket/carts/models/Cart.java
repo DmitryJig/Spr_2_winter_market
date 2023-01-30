@@ -2,6 +2,7 @@ package com.spring.wintermarket.carts.models;
 
 import com.spring.winter.market.api.dtos.ProductDto;
 import lombok.Data;
+import lombok.ToString;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -9,12 +10,14 @@ import java.util.Collections;
 import java.util.List;
 
 @Data
+@ToString
 public class Cart {
     private List<CartItem> items;
     private BigDecimal totalPrice;
 
     public Cart() {
         this.items = new ArrayList<>();
+        this.totalPrice = new BigDecimal("0.0");
     }
 
     public List<CartItem> getItems() {

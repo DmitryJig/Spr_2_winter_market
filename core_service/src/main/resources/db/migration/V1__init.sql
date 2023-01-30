@@ -21,7 +21,20 @@ insert into products (title, price, category_id)
     values
         ('milk', 80.0, 1),
         ('Bread', 25.0, 1),
-        ('Cheese', 300.0, 1);
+        ('Cheese', 300.0, 1),
+        ('Car', 3000000.0, 2),
+        ('Chocolate', 30.0, 1),
+        ('TV', 30000.0, 2),
+        ('Toy car', 300.0, 2),
+        ('Cup', 300.0, 2),
+        ('Cake', 3000.0, 1),
+        ('Tea', 300.0, 1),
+        ('Coffee', 600.0, 1),
+        ('Pen', 100.0, 2),
+        ('Lamp', 100.0, 2),
+        ('Ball', 600.0, 2),
+        ('Laptop', 60000.0, 2),
+        ('Butter', 300.0, 1);
 
 create table orders
 (

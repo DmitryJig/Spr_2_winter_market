@@ -22,7 +22,7 @@ public class ProductController {
 
     @GetMapping
     public Page<ProductDto> findAllProducts(
-            @RequestParam(name = "pageIndex", defaultValue = "1") Integer page,
+            @RequestParam(name = "pageIndex", defaultValue = "1") Integer page, //todo p
             @RequestParam(name = "min_price", required = false) BigDecimal minPrice,
             @RequestParam(name = "max_price", required = false) BigDecimal maxPrice,
             @RequestParam(name = "title_part", required = false) String titlePart
