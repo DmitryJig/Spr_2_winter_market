@@ -4,6 +4,7 @@ import com.spring.winter.market.api.dtos.ProductDto;
 import com.spring.winter.market.api.exceptions.ResourceNotFoundException;
 import com.spring.wintermarket.carts.integrations.ProductServiceIntegration;
 import com.spring.wintermarket.carts.models.Cart;
+import com.spring.wintermarket.carts.repositories.CartRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -15,29 +16,30 @@ import javax.annotation.PostConstruct;
 @RequiredArgsConstructor
 public class CartService {
     private final ProductServiceIntegration productServiceIntegration;
-    private Cart tempCart;
+    private final CartRepository cartRepository;
 
-    @PostConstruct
-    public void init(){
-        tempCart = new Cart();
+//    private Cart tempCart;
+//
+//    @PostConstruct
+//    public void init(){
+//        tempCart = new Cart();
+//    }
+
+    public Cart getCurrentCart(String username){
+        return cartRepository.findCartByUsername(username);
     }
 
-    public Cart getCurrentCart(){
-        return tempCart;
-    }
-
-    public void add(Long productId){
+    public void add(String username, Long productId){
         ProductDto product = productServiceIntegration.getProductById(productId);
-
-        tempCart.add(product);
+        cartRepository.findCartByUsername(username).add(product);
     }
 
-    public void clearCart(){
-        tempCart.clear();
+    public void clearCart(String username){
+        cartRepository.findCartByUsername(username).clear();
     }
 
-    public void remove(Long productId){
-        tempCart.remove(productId);
+    public void remove(String username, Long productId){
+        cartRepository.findCartByUsername(username).remove(productId);
     }
 
 

@@ -1,0 +1,49 @@
+<div>
+    <h3>Корзина</h3>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td>Title product</td>
+            <td>Count</td>
+            <td>Price</td>
+            <td>Action</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="item in cart.items">
+            <td>{{item.productTitle}}</td>
+            <td>
+                <button class="btn btn-light" ng-click="decrementInCart(item.productId)">-</button>
+                {{item.quantity}}
+                <button class="btn btn-light" ng-click="addToCart(item.productId)">+</button>
+            </td>
+            <td>{{item.pricePerProduct + ' x ' + item.quantity + ' = ' + item.price}}</td>
+            <td>
+                <button class="btn btn-danger" ng-click="removeFromCart(item.productId)">Удалить</button>
+            </td>
+        </tr>
+        <tr>
+            <td>Итого</td>
+            <td></td>
+            <td>{{cart.totalPrice}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <button class="btn btn-secondary" ng-click="clearCart()">Очистить корзину</button>
+
+    <div ng-show="isUserLoggedIn()">
+        <form novalidate ng-submit="createOrder()">
+            <!--            <div class="form-group col-md-6">-->
+            <!--                <label for="newOrderAddress">Введите адрес</label>-->
+            <!--                <input class="form-control" type="text" ng-model="orderData.address" id="newOrderAddress">-->
+            <!--            </div>-->
+            <!--            <div class="form-group col-md-6">-->
+            <!--                <label for="newOrderPhone">Введите номер телефона</label>-->
+            <!--                <input class="form-control" type="text" ng-model="orderData.phone" id="newOrderPhone">-->
+            <!--            </div>-->
+            <div>
+                <button class="btn btn-success mt-2 mb-5">Создать заказ</button>
+            </div>
+        </form>
+    </div>
+</div>

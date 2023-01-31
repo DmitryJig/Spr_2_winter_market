@@ -7,8 +7,8 @@ public class CartItemDto {
     private Long productId;
     private String productTitle;
     private int quantity;
-    private BigDecimal pricePerProduct;
-    private BigDecimal price;
+    private BigDecimal pricePerProduct = new BigDecimal("0.0");
+    private BigDecimal price = new BigDecimal("0.0");
 
     public Long getProductId() {
         return productId;

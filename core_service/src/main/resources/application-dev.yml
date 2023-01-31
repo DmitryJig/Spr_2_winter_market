@@ -1,0 +1,10 @@
+integrations:
+  cart-service:
+    url: http://localhost:8100/wiremock/carts/
+    read-timeout: 20000
+    write-timeout: 1000
+    connect-timeout: 10000
+
+#   при входе через профиль все настройки которых тут нет
+#   будут браться из главного файла настроек, а переопределенные из этого
+#   run / edit configurations / active profiles указать dev

@@ -8,7 +8,7 @@ import java.util.List;
 
 public class CartDto {
     private List<CartItemDto> items;
-    private BigDecimal totalPrice;
+    private BigDecimal totalPrice = new BigDecimal("0.0");
 
     public List<CartItemDto> getItems() {
         return items;
