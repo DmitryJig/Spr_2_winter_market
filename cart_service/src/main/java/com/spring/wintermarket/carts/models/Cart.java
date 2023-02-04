@@ -17,13 +17,8 @@ public class Cart {
 
     public Cart() {
         this.items = new ArrayList<>();
-        this.totalPrice = new BigDecimal("0.0");
+        this.totalPrice = BigDecimal.ZERO;
     }
-
-    public List<CartItem> getItems() {
-        return Collections.unmodifiableList(items);
-    }
-
 
     public void add(ProductDto product) {
         for (CartItem item : items) {
@@ -45,11 +40,11 @@ public class Cart {
 
     public void clear() {
         items.clear();
-        totalPrice = new BigDecimal(0.0);
+        totalPrice = BigDecimal.ZERO;
     }
 
     private void recalculate() {
-        totalPrice = new BigDecimal(0.0);
+        totalPrice = BigDecimal.ZERO;
         for (CartItem item : items) {
             totalPrice = totalPrice.add(item.getPrice());
         }

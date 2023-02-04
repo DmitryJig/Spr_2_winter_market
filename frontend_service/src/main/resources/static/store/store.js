@@ -44,7 +44,7 @@ angular.module('market').controller('storeController', function ($scope, $http, 
     }
 
     $scope.addToCart = function (productId) {
-        $http.get(cartContextPath + 'api/v1/cart/add/' + productId);
+        $http.get(cartContextPath + 'api/v1/cart/' + $localStorage.winterMarketGuestCartId +'/add/' + productId);
     }
 
     // $scope.showProductInfo = function (productId) {

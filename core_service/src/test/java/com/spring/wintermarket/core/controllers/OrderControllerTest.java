@@ -34,7 +34,7 @@ class OrderControllerTest extends SpringBootTestBase {
     void findAllOrders() {
         Mockito.doReturn(this.createCartDto()) // подменяем поведение метода интеграции с модулем корзины
                 .when(cartServiceIntegration)
-                .getCurrentCart();
+                .getCurrentCart(null);
         
         orderService.createOrder("TestControllerUsername"); // создаем заказ тестового юзера
 
@@ -57,7 +57,7 @@ class OrderControllerTest extends SpringBootTestBase {
         CartDto cartDto = this.createCartDto();
         Mockito.doReturn(cartDto) // подменяем поведение метода интеграции с модулем корзины
                 .when(cartServiceIntegration)
-                .getCurrentCart();
+                .getCurrentCart(null);
 
         webTestClient.post()
                 .uri("/api/v1/orders")
