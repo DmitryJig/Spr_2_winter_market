@@ -1,6 +1,5 @@
 package com.spring.wintermarket.core.controllers;
 
-import com.spring.winter.market.api.dtos.OrderData;
 import com.spring.winter.market.api.dtos.OrderDto;
 import com.spring.wintermarket.core.converters.OrderConverter;
 import com.spring.wintermarket.core.services.OrderService;
@@ -9,7 +8,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +21,7 @@ public class OrderController {
 
 //     показываем список всех заказов пользователя
     @GetMapping
-    public List<OrderDto> findAllOrders(@RequestHeader String username){
+    public List<OrderDto> getUserOrders(@RequestHeader String username){
         return orderService
                 .findAllOrdersByUserName(username)
                 .stream()

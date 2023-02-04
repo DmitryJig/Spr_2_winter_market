@@ -27,7 +27,7 @@ class OrderServiceTest extends SpringBootTestBase {
         CartDto cartDto = this.createCartDto();
         Mockito.doReturn(cartDto) // подменяем поведение метода интеграции с модулем корзины
                 .when(cartServiceIntegration)
-                .getCurrentCart();
+                .getCurrentCart(null);
         orderService.createOrder("testServiceUsername");
         List<Order> allOrderByRepo = orderRepository.findAll();
         Order lastOrderByRepo = allOrderByRepo.get(allOrderByRepo.size()-1);
@@ -39,10 +39,10 @@ class OrderServiceTest extends SpringBootTestBase {
     void findAllOrdersByUserName() {
         Mockito.doReturn(this.createCartDto()) // подменяем поведение метода интеграции с модулем корзины
                 .when(cartServiceIntegration)
-                .getCurrentCart();
+                .getCurrentCart(null);
 
         orderService.createOrder("Testusername"); // создаем заказ тестового юзера
-        List<Order> ordersByRepo = orderRepository.findAllByUsername("Testusername");
+        List<Order> ordersByRepo = orderRepository.findByUsername("Testusername");
         Order lastOrderByRepo = ordersByRepo.get(ordersByRepo.size() - 1);
         Assertions.assertEquals("Testusername", lastOrderByRepo.getUsername());
     }

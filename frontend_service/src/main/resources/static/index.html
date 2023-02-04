@@ -9,7 +9,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/ngStorage/0.3.11/ngStorage.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.0/angular-route.min.js"></script>
-
+    <link rel="icon" href="favicon-32x32.png" type="image/x-icon">
 </head>
 <body>
 <div class="container" ng-controller="indexController">
@@ -27,6 +27,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="#!/cart">Корзина</a>
             </li>
+            <li class="nav-item" ng-show="isUserLoggedIn()">
+                <a class="nav-link" href="#!/orders">Мои заказы</a>
+            </li>
 
             <li class="nav-item" ng-show="!isUserLoggedIn()">
                 <form class="align-middle" ng-submit="tryToAuth()">
@@ -41,6 +44,9 @@
                     </div>
                 </form>
             </li>
+            <li class="nav-item" ng-show="!isUserLoggedIn()">
+                <a class="nav-link" href="#!/registration">Регистрация</a>
+            </li>
             <li class="nav-item" ng-show="isUserLoggedIn()" style="...">
                 <button class="btn btn-outline-secondary btn-sm" ng-click="tryToLogout()">Выйти</button>
             </li>
@@ -53,22 +59,8 @@
     <script src="store/store.js"></script>
     <script src="cart/cart.js"></script>
     <script src="welcome/welcome.js"></script>
-
-    <table ng-show="isUserLoggedIn()" class="table table-hover">
-        <thead>
-        <tr>
-            <td>ID</td>
-            <td>Total price</td>
-        </tr>
-        </thead>
-        <tbody>
-        <tr ng-repeat="order in Orders">
-            <td>{{order.id}}</td>
-            <td>{{order.totalPrice}}</td>
-        </tr>
-        </tbody>
-    </table>
-
+    <script src="orders/orders.js"></script>
+    <script src="registration/registration.js"></script>
 
     <h3>Create new product</h3>
     <form novalidate ng-submit="submitCreateProduct()">

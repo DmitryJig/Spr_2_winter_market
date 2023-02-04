@@ -2,26 +2,28 @@ angular.module('market').controller('cartController', function ($scope, $http, $
     const contextPath = 'http://localhost:5555/cart/';
     const coreContextPath = 'http://localhost:5555/core/';
 
-    $scope.decrementInCart = function (productId) {
-        $http.get(contextPath + 'api/v1/cart/decrement/' + productId).then(function (response) {
-            $scope.loadCart();
-        });
-    }
+    // $scope.decrementInCart = function (productId) {
+    //     $http.get(contextPath + 'api/v1/cart/decrement/' + productId).then(function (response) {
+    //         $scope.loadCart();
+    //     });
+    // }
 
     $scope.loadCart = function () {
-        $http.get(contextPath + 'api/v1/cart').then(function (response) {
+        $http.get(contextPath + 'api/v1/cart/' + $localStorage.winterMarketGuestCartId)
+            .then(function (response) {
             $scope.cart = response.data;
         });
     }
 
     $scope.clearCart = function () {
-        $http.put(contextPath + 'api/v1/cart/clear').then(function (response) {
+        $http.put(contextPath + 'api/v1/cart/' + $localStorage.winterMarketGuestCartId + '/clear')
+            .then(function (response) {
             $scope.loadCart();
         })
     }
 
     $scope.removeFromCart = function (productId) {
-        $http.get(contextPath + 'api/v1/cart/remove/' + productId)
+        $http.get(contextPath + 'api/v1/cart/' + $localStorage.winterMarketGuestCartId + '/remove/' + productId)
             .then(function (response) {
                 $scope.loadCart();
             })

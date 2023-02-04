@@ -19,10 +19,14 @@
                 templateUrl: 'cart/cart.html',
                 controller: 'cartController'
             })
-            // .when('/orders', {
-            //     templateUrl: 'orders/orders.html',
-            //     controller: 'ordersController'
-            // })
+            .when('/orders', {
+                templateUrl: 'orders/orders.html',
+                controller: 'ordersController'
+            })
+            .when('/registration', {
+                templateUrl: 'registration/registration.html',
+                controller: 'registrationController'
+            })
             // .when('/order_pay/:orderId', {
             //     templateUrl: 'order_pay/order_pay.html',
             //     controller: 'orderPayController'
@@ -45,8 +49,13 @@
                 }
             } catch (e) {
             }
-
             $http.defaults.headers.common.Authorization = 'Bearer ' + $localStorage.winterMarketUser.token;
+        }
+        if (!$localStorage.winterMarketGuestCartId){
+            $http.get('http://localhost:5555/cart/api/v1/cart/generate_uuid')
+                .then(function successCallback(response){
+                    $localStorage.winterMarketGuestCartId = response.data.value;
+            });
         }
     }
 })();
@@ -87,13 +96,6 @@ angular.module('market').controller('indexController', function ($rootScope, $sc
             } else {
                 return false;
             }
-        }
-
-        $scope.loadOrders = function () {
-            $http.get(contextPath + '/core/api/v1/orders').then(function (response) {
-                $scope.Orders = response.data;
-
-            })
         }
 
         // $scope.submitCreateProduct = function () {

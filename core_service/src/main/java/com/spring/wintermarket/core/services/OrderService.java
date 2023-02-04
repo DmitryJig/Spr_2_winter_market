@@ -24,7 +24,7 @@ public class OrderService {
     @Transactional
     public void createOrder(String username){
 
-        CartDto cartDto = cartServiceIntegration.getCurrentCart();
+        CartDto cartDto = cartServiceIntegration.getCurrentCart(username);
 
         Order order = new Order();
         order.setUsername(username);
@@ -41,7 +41,7 @@ public class OrderService {
                         )
         ).collect(Collectors.toList()));
         orderRepository.save(order);
-        cartServiceIntegration.clearCart();
+        cartServiceIntegration.clearCart(username);
     }
 
 //    public void createOrder(User user, OrderData orderData){
@@ -61,6 +61,6 @@ public class OrderService {
 //    }
 
     public List<Order> findAllOrdersByUserName(String username){
-        return orderRepository.findAllByUsername(username);
+        return orderRepository.findByUsername(username);
     }
 }

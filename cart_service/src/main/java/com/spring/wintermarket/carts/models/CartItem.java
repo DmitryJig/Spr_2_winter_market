@@ -13,8 +13,8 @@ public class CartItem {
     private Long productId;
     private String productTitle;
     private int quantity;
-    private BigDecimal pricePerProduct = new BigDecimal("0.0");
-    private BigDecimal price = new BigDecimal("0.0");
+    private BigDecimal pricePerProduct;
+    private BigDecimal price;
 
     public void changeQuantity(int delta){
         quantity += delta;

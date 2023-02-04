@@ -1,0 +1,56 @@
+<div>
+    <h3>My orders</h3>
+    <table ng-show="isUserLoggedIn()" class="table table-hover">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>Total price</td>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="order in orders">
+            <td>{{order.id}}</td>
+            <td>{{order.totalPrice}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <h3>Details</h3>
+
+    <table class="table table-hover" ng-repeat="order in orders">
+        <thead>
+        <tr>
+            <td>Order ID: {{order.id}}</td>
+        </tr>
+        </thead>
+        <tr>
+            <td>
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <td>Product title</td>
+                        <td>Quantity</td>
+                        <td>Price</td>
+                        <td>Total</td>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="orderItem in order.orderItemDtos">
+                        <td>{{orderItem.productTitle}}</td>
+                        <td>{{orderItem.quantity}}</td>
+                        <td>{{orderItem.pricePerProduct}}</td>
+                        <td>{{orderItem.price}}</td>
+                    </tr>
+                    <tr>
+                        <td>Итого</td>
+                        <td></td>
+                        <td></td>
+                        <td>{{order.totalPrice}}</td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+    </table>
+</div>
+</div>
