@@ -41,6 +41,13 @@ public class CartController {
         cartService.clearCart(targetUuid);
     }
 
+    // объединяем гостевую корзину с корзиной в момент авторизации, при этом обнуляя гостевую
+    @PutMapping("/{uuid}/merge")
+    @ResponseStatus(HttpStatus.OK)
+    public void mergeCart(@RequestHeader(name = "username", required = false) String username, @PathVariable String uuid){
+        cartService.mergeCart(username, uuid);
+    }
+
     // удаляем строку из корзины
     @GetMapping("/{uuid}/remove/{id}")
     public void removeFromCart(@RequestHeader(name = "username", required = false) String username, @PathVariable String uuid, @PathVariable Long id){
@@ -61,4 +68,6 @@ public class CartController {
         }
         return uuid;
     }
+
+
 }

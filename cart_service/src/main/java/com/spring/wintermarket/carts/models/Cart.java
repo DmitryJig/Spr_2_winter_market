@@ -32,6 +32,23 @@ public class Cart {
         recalculate();
     }
 
+    public void mergeCart(Cart addedCart){
+        addedCart.getItems().forEach(addedItem -> {
+            boolean isProductExists = false;
+            for (CartItem item : items){
+                if (addedItem.getProductId().equals(item.getProductId())){
+                    item.changeQuantity(addedItem.getQuantity());
+                    isProductExists = true;
+                    break;
+                }
+            }
+            if (!isProductExists){
+                items.add(addedItem);
+            }
+            recalculate();
+        });
+    }
+
     public void remove(Long productId) {
         if (items.removeIf(item -> item.getProductId().equals(productId))) {
             recalculate();

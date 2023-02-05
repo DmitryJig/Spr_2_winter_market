@@ -71,8 +71,8 @@ angular.module('market').controller('indexController', function ($rootScope, $sc
 
                         $scope.user.username = null;
                         $scope.user.password = null;
-
                         $location.path('/');
+                        $scope.mergeCart();
                     }
                 }, function errorCallback(response) {
 
@@ -97,6 +97,13 @@ angular.module('market').controller('indexController', function ($rootScope, $sc
                 return false;
             }
         }
+
+    $scope.mergeCart = function () {
+        $http.put('http://localhost:5555/cart/' + 'api/v1/cart/' + $localStorage.winterMarketGuestCartId + '/merge')
+            .then(function (response){
+                console.log('carts merged')
+            })
+    }
 
         // $scope.submitCreateProduct = function () {
         //     $http.post(contextPath + '/core/api/v1/products', $scope.newProduct).then(function (response) {
