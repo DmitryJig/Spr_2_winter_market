@@ -1,7 +1,6 @@
 angular.module('market').controller('registrationController', function ($scope, $http, $location, $localStorage) {
     const contextPath = 'http://localhost:5555/auth/';
 
-
     $scope.functionRegistration = function () {
         $http.post(contextPath + 'registration', $scope.reguser)
             .then(function (response) {
@@ -10,6 +9,7 @@ angular.module('market').controller('registrationController', function ($scope, 
                     $localStorage.winterMarketUser = {username: $scope.reguser.username, token: response.data.token};
                     $localStorage.reguser = null;
                     $location.path("/");
+                    $scope.mergeCart();
                 }
             });
     }

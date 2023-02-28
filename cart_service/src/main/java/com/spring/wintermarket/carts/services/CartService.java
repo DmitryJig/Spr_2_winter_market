@@ -43,6 +43,15 @@ public class CartService {
         execute(uuid, Cart::clear);
     }
 
+    public void mergeCart(String username, String uuid){
+        log.info("Слияние гостевой корзины с корзиной пользователя " + username);
+        Cart guestCart = getCurrentCart(uuid);
+        Cart userCart = getCurrentCart(username);
+        userCart.mergeCart(guestCart);
+        redisTemplate.opsForValue().set(cartPrefix + username, userCart);
+        clearCart(uuid);
+    }
+
     public void remove(String uuid, Long productId) {
         execute(uuid, cart -> cart.remove(productId));
     }
