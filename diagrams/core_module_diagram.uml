@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Diagram>
+  <ID>JAVA</ID>
+  <OriginalElement>com.spring.wintermarket.core.repositories</OriginalElement>
+  <nodes>
+    <node x="-90.78571428571422" y="2653.0">com.spring.wintermarket.core.converters.OrderConverter</node>
+    <node x="-90.78571428571422" y="2510.0">com.spring.wintermarket.core.converters.OrderItemConverter</node>
+    <node x="-39.28571428571422" y="2794.0">com.spring.wintermarket.core.controllers.OrderController</node>
+    <node x="685.875" y="1853.0">com.spring.wintermarket.core.services.ProductService</node>
+    <node x="1362.875" y="1230.0">com.spring.wintermarket.core.services.CategoryService</node>
+    <node x="120.5" y="2954.0">com.spring.wintermarket.core.exceptions.GlobalExceptionHandler</node>
+    <node x="-16.75" y="1905.5">com.spring.wintermarket.core.repositories.OrderRepository</node>
+    <node x="1758.875" y="307.0">com.spring.wintermarket.core.soap.productsws.GetProductByNameRequest</node>
+    <node x="620.875" y="2291.0">com.spring.wintermarket.core.controllers.ProductController</node>
+    <node x="1173.5" y="2954.0">com.spring.wintermarket.core.repositories.specifications</node>
+    <node x="-92.28571428571422" y="2317.0">com.spring.wintermarket.core.services.OrderService</node>
+    <node x="796.5" y="2954.0">com.spring.wintermarket.core.WinterMarketCoreApplication</node>
+    <node x="2095.875" y="307.0">com.spring.wintermarket.core.soap.productsws.GetProductByNameResponse</node>
+    <node x="-331.0" y="3381.0">com.spring.wintermarket.core.configs.AppConfig</node>
+    <node x="1270.875" y="2330.0">com.spring.wintermarket.core.converters.CategoryConverter</node>
+    <node x="467.8395714285715" y="-296.12857142857143">com.spring.wintermarket.core.entities.Category</node>
+    <node x="326.3392857142858" y="436.0">com.spring.wintermarket.core.entities.Product</node>
+    <node x="1280.875" y="1879.0">com.spring.wintermarket.core.converters.ProductConverter</node>
+    <node x="2311.375" y="475.0">com.spring.wintermarket.core.soap.productsws.ObjectFactory</node>
+    <node x="-313.5" y="2954.0">com.spring.wintermarket.core.properties.CartServiceIntegrationProperties</node>
+    <node x="2425.375" y="-17.0">com.spring.wintermarket.core.soap.productsws.ProductWs</node>
+    <node x="1362.875" y="645.5">com.spring.wintermarket.core.repositories.CategoryRepository</node>
+    <node x="1879.5" y="2954.0">com.spring.wintermarket.core.repositories.OrderItemRepository</node>
+    <node x="-342.45142857142855" y="-259.16571428571433">com.spring.wintermarket.core.entities.OrderItem</node>
+    <node x="2447.875" y="307.0">com.spring.wintermarket.core.soap.productsws.GetAllProductsResponse</node>
+    <node x="332.25" y="1879.0">com.spring.wintermarket.core.integrations.CartServiceIntegration</node>
+    <node x="2755.875" y="334.0">com.spring.wintermarket.core.soap.productsws.GetAllProductsRequest</node>
+    <node x="-295.20142857142855" y="1409.0">com.spring.wintermarket.core.entities.Order</node>
+    <node x="887.5892857142858" y="1258.0">com.spring.wintermarket.core.repositories.ProductRepository</node>
+  </nodes>
+  <notes />
+  <edges>
+    <edge source="com.spring.wintermarket.core.services.ProductService" target="com.spring.wintermarket.core.services.CategoryService" relationship="TO_ONE">
+      <point x="250.0" y="15.0" />
+      <point x="1258.0" y="1951.5" />
+      <point x="1258.0" y="1274.5" />
+      <point x="-175.5" y="0.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.services.OrderService" target="com.spring.wintermarket.core.repositories.OrderRepository" relationship="TO_ONE">
+      <point x="-19.46428571428578" y="-57.5" />
+      <point x="0.0" y="31.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.services.OrderService" target="com.spring.wintermarket.core.integrations.CartServiceIntegration" relationship="TO_ONE">
+      <point x="252.0" y="-57.5" />
+      <point x="-70.53571428571422" y="57.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.soap.productsws.GetProductByNameResponse" target="com.spring.wintermarket.core.soap.productsws.ProductWs" relationship="TO_ONE">
+      <point x="0.0" y="-58.0" />
+      <point x="2261.875" y="281.0" />
+      <point x="2524.375" y="281.0" />
+      <point x="0.0" y="136.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.soap.productsws.ObjectFactory" target="com.spring.wintermarket.core.soap.productsws.GetAllProductsResponse" relationship="CREATE">
+      <point x="0.0" y="-96.5" />
+      <point x="0.0" y="58.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.soap.productsws.ObjectFactory" target="com.spring.wintermarket.core.soap.productsws.GetProductByNameResponse" relationship="CREATE">
+      <point x="-272.5" y="-96.5" />
+      <point x="57.0" y="58.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.entities.Order" target="com.spring.wintermarket.core.entities.OrderItem" relationship="TO_MANY">
+      <point x="66.75" y="-292.5" />
+      <point x="0.0" y="305.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.services.OrderService" target="com.spring.wintermarket.core.entities.OrderItem" relationship="CREATE">
+      <point x="-259.5" y="0.0" />
+      <point x="-312.70142857142855" y="2374.5" />
+      <point x="-207.25" y="305.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.soap.productsws.GetAllProductsResponse" target="com.spring.wintermarket.core.soap.productsws.ProductWs" relationship="TO_MANY">
+      <point x="0.0" y="-58.0" />
+      <point x="2591.375" y="281.0" />
+      <point x="2524.375" y="281.0" />
+      <point x="0.0" y="136.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.services.ProductService" target="com.spring.wintermarket.core.entities.Product" relationship="CREATE">
+      <point x="250.0" y="0.0" />
+      <point x="1234.0" y="1936.5" />
+      <point x="1234.0" y="676.5" />
+      <point x="264.4997142857143" y="0.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.services.CategoryService" target="com.spring.wintermarket.core.repositories.CategoryRepository" relationship="TO_ONE">
+      <point x="0.0" y="-44.5" />
+      <point x="0.0" y="31.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.converters.ProductConverter" target="com.spring.wintermarket.core.entities.Product" relationship="CREATE">
+      <point x="-164.5" y="0.0" />
+      <point x="1234.0" y="1936.5" />
+      <point x="1234.0" y="676.5" />
+      <point x="264.4997142857143" y="0.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.converters.OrderItemConverter" target="com.spring.wintermarket.core.services.OrderService" relationship="TO_ONE">
+      <point x="-2.8571428578061386E-4" y="-44.5" />
+      <point x="77.714" y="2471.0" />
+      <point x="167.214" y="2471.0" />
+      <point x="-2.8571428578061386E-4" y="57.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.soap.productsws.ObjectFactory" target="com.spring.wintermarket.core.soap.productsws.ProductWs" relationship="CREATE">
+      <point x="-280.0" y="15.0" />
+      <point x="1706.375" y="586.5" />
+      <point x="1706.375" y="119.0" />
+      <point x="-99.0" y="0.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.services.ProductService" target="com.spring.wintermarket.core.repositories.ProductRepository" relationship="TO_ONE">
+      <point x="64.21428571428578" y="-83.5" />
+      <point x="0.0" y="16.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.controllers.OrderController" target="com.spring.wintermarket.core.services.OrderService" relationship="TO_ONE">
+      <point x="96.49971428571422" y="-57.5" />
+      <point x="263.714" y="2471.0" />
+      <point x="167.214" y="2471.0" />
+      <point x="-2.8571428578061386E-4" y="57.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.entities.OrderItem" target="com.spring.wintermarket.core.entities.Product" relationship="TO_ONE">
+      <point x="0.0" y="-305.5" />
+      <point x="-105.45142857142855" y="411.0" />
+      <point x="590.839" y="411.0" />
+      <point x="-2.8571428572377044E-4" y="-240.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.entities.OrderItem" target="com.spring.wintermarket.core.entities.Order" relationship="TO_ONE">
+      <point x="-66.75" y="305.5" />
+      <point x="0.0" y="-292.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.services.OrderService" target="com.spring.wintermarket.core.entities.Order" relationship="CREATE">
+      <point x="-252.0" y="-57.5" />
+      <point x="-84.78571428571422" y="2273.0" />
+      <point x="-96.23714285714277" y="2273.0" />
+      <point x="75.96428571428578" y="292.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.converters.ProductConverter" target="com.spring.wintermarket.core.services.CategoryService" relationship="TO_ONE">
+      <point x="-164.5" y="-15.0" />
+      <point x="1258.0" y="1921.5" />
+      <point x="1258.0" y="1274.5" />
+      <point x="-175.5" y="0.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.converters.CategoryConverter" target="com.spring.wintermarket.core.converters.ProductConverter" relationship="TO_ONE">
+      <point x="0.0" y="-44.5" />
+      <point x="1445.375" y="2121.5" />
+      <point x="1255.0" y="2121.5" />
+      <point x="1255.0" y="1974.5" />
+      <point x="-164.5" y="38.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.controllers.ProductController" target="com.spring.wintermarket.core.services.ProductService" relationship="TO_ONE">
+      <point x="0.0" y="-83.5" />
+      <point x="0.0" y="83.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.configs.AppConfig" target="com.spring.wintermarket.core.properties.CartServiceIntegrationProperties" relationship="TO_ONE">
+      <point x="0.0" y="-44.5" />
+      <point x="0.0" y="188.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.services.OrderService" target="com.spring.wintermarket.core.services.ProductService" relationship="TO_ONE">
+      <point x="-2.8571428578061386E-4" y="-57.5" />
+      <point x="167.214" y="2260.0" />
+      <point x="935.875" y="2260.0" />
+      <point x="0.0" y="83.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.entities.Product" target="com.spring.wintermarket.core.entities.Category" relationship="TO_ONE">
+      <point x="14.999714285714276" y="-240.5" />
+      <point x="605.839" y="411.0" />
+      <point x="605.8392857142858" y="411.0" />
+      <point x="14.999714285714276" y="201.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.soap.productsws.ObjectFactory" target="com.spring.wintermarket.core.soap.productsws.GetAllProductsRequest" relationship="CREATE">
+      <point x="272.5" y="-96.5" />
+      <point x="-28.0" y="31.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.controllers.OrderController" target="com.spring.wintermarket.core.converters.OrderConverter" relationship="TO_ONE">
+      <point x="-89.5" y="-57.5" />
+      <point x="0.0" y="44.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.entities.Category" target="com.spring.wintermarket.core.entities.Product" relationship="TO_MANY">
+      <point x="-2.8571428572377044E-4" y="201.5" />
+      <point x="590.8392857142858" y="411.0" />
+      <point x="590.839" y="411.0" />
+      <point x="-2.8571428572377044E-4" y="-240.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.converters.OrderConverter" target="com.spring.wintermarket.core.converters.OrderItemConverter" relationship="TO_ONE">
+      <point x="0.0" y="-44.5" />
+      <point x="0.0" y="44.5" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.controllers.ProductController" target="com.spring.wintermarket.core.converters.ProductConverter" relationship="TO_ONE">
+      <point x="15.0" y="-83.5" />
+      <point x="950.875" y="2121.5" />
+      <point x="1255.0" y="2121.5" />
+      <point x="1255.0" y="1974.5" />
+      <point x="-164.5" y="38.0" />
+    </edge>
+    <edge source="com.spring.wintermarket.core.soap.productsws.ObjectFactory" target="com.spring.wintermarket.core.soap.productsws.GetProductByNameRequest" relationship="CREATE">
+      <point x="-280.0" y="0.0" />
+      <point x="1917.375" y="571.5" />
+      <point x="0.0" y="58.0" />
+    </edge>
+  </edges>
+  <settings layout="Hierarchic" zoom="0.6986027944111777" showDependencies="true" x="1070.657464" y="1011.9571428571428" />
+  <SelectedNodes />
+  <Categories>
+    <Category>Constructors</Category>
+    <Category>Fields</Category>
+    <Category>Methods</Category>
+    <Category>Properties</Category>
+  </Categories>
+  <SCOPE>All</SCOPE>
+  <VISIBILITY>private</VISIBILITY>
+</Diagram>
+

@@ -20,13 +20,22 @@ public abstract class SpringBootTestBase {
      */
     public CartDto createCartDto() {
         CartDto cartDto = new CartDto();
+
+        Long productId = 1L;
+        String productTitle = "milk";
+        int quantity = 2;
+        BigDecimal pricePerProduct = BigDecimal.valueOf(80.0);
+
         List<CartItemDto> itemDtos = new ArrayList<>();
-        CartItemDto cartItemDto = new CartItemDto();
-        cartItemDto.setProductId(Long.valueOf(1L));
-        cartItemDto.setProductTitle("milk");
-        cartItemDto.setQuantity(2);
-        cartItemDto.setPricePerProduct(BigDecimal.valueOf(80.0));
-        cartItemDto.setPrice(cartItemDto.getPricePerProduct().multiply(BigDecimal.valueOf(cartItemDto.getQuantity())));
+        CartItemDto cartItemDto = CartItemDto.Builder
+                .newBuilder()
+                .productId(Long.valueOf(productId))
+                .productTitle(productTitle)
+                .quantity(quantity)
+                .pricePerProduct(pricePerProduct)
+                .price(pricePerProduct.multiply(BigDecimal.valueOf(quantity)))
+                .build();
+
         itemDtos.add(cartItemDto);
         cartDto.setItems(itemDtos);
         BigDecimal cartTotalPrice = BigDecimal.valueOf(0);
